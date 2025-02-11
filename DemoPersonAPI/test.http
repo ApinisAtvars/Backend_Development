@@ -1,0 +1,41 @@
+@url = http://localhost:5012
+
+GET {{{url}}}/hello
+
+###
+
+GET {{url}}/hello/Viola
+
+### 
+
+POST {{url}}/person 
+Content-Type: application/json
+
+{
+    "name": "Dieter",
+    "age": 32,
+    "email": "dieter.de.bester@hotmail.com"
+}
+
+### Bad request test
+
+POST {{url}}/person 
+Content-Type: application/json
+
+{
+    "name": "Violaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "age": 2,
+    "email": "violang04gmail.com"
+}
+
+### Test GetPersons from API service
+
+GET {{url}}/person
+
+### Test GetPersonById from API service
+
+GET {{url}}/person/1
+
+### Test Error for GetPersonById from API service
+
+GET {{url}}/person/100
