@@ -1,0 +1,36 @@
+namespace Exercise1.Repositories;
+
+public interface IWineRepository
+{
+    void AddWine(Wine wine);
+    List<Wine> GetWines();
+    Wine GetWineById(int id);
+    void DeleteWine(Wine wine);
+}
+
+public class WineRepository : IWineRepository
+{
+    private static List<Wine> _wines = new List<Wine>();
+    public void AddWine(Wine wine)
+    {
+        wine.WineId = _wines.Count + 1;
+        _wines.Add(wine);
+    }
+
+    public Wine GetWineById(int id)
+    {
+        // SELECT * from Wines WHERE id = ID;
+        return _wines.FirstOrDefault(x => x.WineId == id);
+    }
+
+    public List<Wine> GetWines()
+    {
+        return _wines;
+    }
+
+    public void DeleteWine(Wine wine)
+    {
+        // Wine object passed, because validation happens in the service layer
+        _wines.Remove(wine);
+    }
+}

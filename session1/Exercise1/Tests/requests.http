@@ -1,0 +1,23 @@
+@url = http://localhost:3000
+
+### Basic GET /wine request
+
+GET {{url}}/wine
+
+### Basic POST of single wine
+
+POST {{url}}/wine
+Content-Type: application/json
+
+{
+    "name": "Château Margaux",
+    "year": 2015,
+    "country": "France",
+    "color": "Red",
+    "price": 399.99,
+    "grapes": "Cabernet Sauvignon, Merlot"
+}
+
+### GET all wines
+
+GET {{url}}/wines
