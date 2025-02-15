@@ -11,13 +11,20 @@ public interface IWineService
 public class WineService : IWineService
 {
     private readonly IWineRepository _wineRepository;
-    public WineService(IWineRepository wineRepository)
+    private readonly WineValidator _wineValidator;
+    public WineService(IWineRepository wineRepository, WineValidator wineValidator)
     {
         _wineRepository = wineRepository;
+        _wineValidator = wineValidator;
     }
 
     public void AddWine(Wine wine)
     {
+        var validationResult = _wineValidator.Validate(wine);
+        if (!validationResult.IsValid)
+        {
+            throw new CustomValidationException(validationResult.Errors);
+        }
         _wineRepository.AddWine(wine);
     }
 
@@ -38,6 +45,13 @@ public class WineService : IWineService
         {
             throw new WineNotFoundException("Wine not found");
         }
+        try
+        {
         _wineRepository.DeleteWine(wine);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
     }
 }

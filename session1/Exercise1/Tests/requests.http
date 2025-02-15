@@ -21,3 +21,40 @@ Content-Type: application/json
 ### GET all wines
 
 GET {{url}}/wines
+
+### DELETE wine by ID
+
+DELETE {{url}}/wine/2
+
+### PUT wine by Json
+
+PUT {{url}}/wines
+Content-Type: application/json
+
+{
+  "wineId": 1,
+  "name": "Mulfffefdgrregergege",
+  "year": 2019,
+  "country": "Austria",
+  "color": "White",
+  "price": 12.5,
+  "grapes": "Gruner Veltliner"
+}
+
+### Test Incorrect POST
+
+POST {{url}}/wine
+Content-Type: application/json
+
+{
+    "name": "C",
+    "year": 2000,
+    "country": "France",
+    "color": "Red",
+    "price": 399.99,
+    "grapes": "Cabernet Sauvignon, Merlot"
+}
+
+### Test OpenAPI
+
+GET {{url}}/openapi/v1.json

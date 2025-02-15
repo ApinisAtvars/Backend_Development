@@ -20,7 +20,14 @@ public class WineRepository : IWineRepository
     public Wine GetWineById(int id)
     {
         // SELECT * from Wines WHERE id = ID;
+        try
+        {
         return _wines.FirstOrDefault(x => x.WineId == id);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
     }
 
     public List<Wine> GetWines()
@@ -30,7 +37,6 @@ public class WineRepository : IWineRepository
 
     public void DeleteWine(Wine wine)
     {
-        // Wine object passed, because validation happens in the service layer
         _wines.Remove(wine);
     }
 }

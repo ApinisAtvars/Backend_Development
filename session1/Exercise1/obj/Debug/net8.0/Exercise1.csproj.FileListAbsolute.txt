@@ -31,3 +31,6 @@ C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session1\Ex
 C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session1\Exercise1\obj\Debug\net8.0\Exercise1.csproj.AssemblyReference.cache
 C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session1\Exercise1\obj\Debug\net8.0\Exercise1.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session1\Exercise1\obj\Debug\net8.0\Exercise1.csproj.Up2Date
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session1\Exercise1\bin\Debug\net8.0\Exercise1.staticwebassets.endpoints.json
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session1\Exercise1\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session1\Exercise1\obj\Debug\net8.0\staticwebassets\msbuild.Exercise1.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
