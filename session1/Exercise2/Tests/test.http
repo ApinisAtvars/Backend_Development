@@ -1,0 +1,82 @@
+@url = http://localhost:5065
+
+### POSTing a brand
+POST {{url}}/brands
+Content-Type: application/json
+
+{
+"name": "Cartvars",
+"country": "Latvia",
+"logo": "https://cartvars.com/logo.png"
+}
+
+### GETting all brands
+
+GET {{url}}/brands
+
+### GETting a brand by ID
+
+GET {{url}}/brands/4
+
+### GETting a brand by country
+
+GET {{url}}/brands/country/Latvia
+
+
+### POSTing a car model
+
+POST {{url}}/carmodels
+Content-Type: application/json
+
+{
+"name": "Cartvars",
+"brand":{
+"brandid": 1,
+"name": "Cartvars",
+"country": "Latvia",
+"logo": "https://cartvars.com/logo.png"
+}
+}
+
+### GETting all car models
+
+GET {{url}}/carmodels
+
+### GETting a car model by ID
+
+GET {{url}}/carmodels/4
+
+### GETting a car model by brand
+
+GET {{url}}/carmodels/brand/1
+
+### GETting a car model by country
+
+GET {{url}}/carmodels/country/Latvia
+
+
+### POSTing a WRONG Brand
+
+POST {{url}}/brands
+Content-Type: application/json
+
+{
+"name": "C",
+"country": "La",
+"logo": "httg"
+}
+
+### POSTing a WRONG Car Model
+
+POST {{url}}/brands
+Content-Type: application/json
+
+{
+"name": "Ca",
+"brand":{
+"brandid": 1,
+"name": "Cartvars",
+"country": "Latvia",
+"logo": "https://cartvars.com/logo.png"
+}
+}
