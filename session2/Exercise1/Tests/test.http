@@ -1,0 +1,17 @@
+@url = http://localhost:5121
+
+### GETting all persons
+GET {{url}}/persons
+
+### GETting a single person
+GET {{url}}/persons/1
+
+### POSTing a new person
+POST {{url}}/persons
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "age": 30,
+  "email": "johnnydoe@gmail.com"
+}
