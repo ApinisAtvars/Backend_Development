@@ -15,3 +15,18 @@ Content-Type: application/json
   "age": 30,
   "email": "johnnydoe@gmail.com"
 }
+
+### PUTting a person
+PUT {{url}}/persons/
+Content-Type: application/json
+
+{
+    "id": 1,
+  "name": "Johwwwn Doe",
+  "age": 30,
+  "email": "johnnydoe@gmail.com"
+}
+
+### DELETEing a person
+
+DELETE {{url}}/persons/1

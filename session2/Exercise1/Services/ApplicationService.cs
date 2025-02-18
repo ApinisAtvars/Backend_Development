@@ -5,6 +5,8 @@ public interface IApplicationService
     Task<List<Person>> GetPersons();
     Task<Person> GetPersonById(int id);
     Task AddPerson(Person person);
+    Task<Person> UpdatePerson(Person person);
+    Task DeletePerson(int id);
 }
 public class ApplicationService : IApplicationService
 {
@@ -28,5 +30,16 @@ public class ApplicationService : IApplicationService
     public async Task AddPerson(Person person)
     {
         await _personRepository.AddPerson(person);
+    }
+
+    public async Task<Person> UpdatePerson(Person person)
+    {
+        await _personRepository.UpdatePerson(person);
+        return person;
+    }
+
+    public async Task DeletePerson(int id)
+    {
+        await _personRepository.DeletePerson(id);
     }
 }

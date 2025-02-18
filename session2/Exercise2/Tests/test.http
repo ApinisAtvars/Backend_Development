@@ -1,0 +1,4 @@
+@url = http://localhost:5087
+
+### GETting all travellers
+GET {{url}}/travellers

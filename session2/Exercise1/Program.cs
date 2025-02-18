@@ -43,5 +43,21 @@ app.MapPost("/persons", async (IApplicationService applicationService, Person pe
     return Results.Created($"/persons/{person.Id}", mapper.Map<PersonDTO>(person));
 });
 
+app.MapPut("/persons/", async (IApplicationService applicationService, Person person, IValidator<Person> validator) =>
+{
+    var validationResult = validator.Validate(person);
+    if (!validationResult.IsValid)
+    {
+        return Results.BadRequest(validationResult.Errors);
+    }
+    await applicationService.UpdatePerson(person);
+    return Results.Ok();
+});
+
+app.MapDelete("/persons/{id}", async (IApplicationService applicationService, int id) =>
+{
+    await applicationService.DeletePerson(id);
+    return Results.NoContent();
+});
 
 app.Run();
