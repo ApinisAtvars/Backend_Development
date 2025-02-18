@@ -1,0 +1,63 @@
+@url = http://localhost:5165
+
+### GETting all locations
+GET {{url}}/locations
+
+
+### POSTing a new vaccination registration
+POST {{url}}/registration
+Content-Type: application/json
+
+{
+    "location": "Helsinki",
+    "vaccinationDate": "2021-12-24",
+    "vaccinationTime": "12:00",
+    "ssn": "123456-7890",
+    "name": "Doe",
+    "firstname": "John",
+    "email": "john.doe@gmail.com",
+    "yearOfBirth": 1990,
+    "vaccinTypeId": "2774e3d1-2b0f-47ab-b391-8ea43e6f9d80",
+    "vaccinationLocationId": "2774e3d1-2b0f-47ab-b391-8ea43e6f9d80"
+
+}
+
+### GETting all registrations
+
+GET {{url}}/registrations
+
+### GETting all vaccinations
+
+GET {{url}}/vaccins
+
+### WRONG POSTing a new vaccination registration
+
+POST {{url}}/registration
+Content-Type: application/json
+
+{
+    "name" : "Trump",
+    "firstName" : "Donald",
+    "email" : "donald@maga.eu",
+    "yearOfBirth" : 1952,
+    "vaccinationDate": "1/1/2022",
+    "vaccinTypeId" : "4e2a72fb-f4fa-416f-87cd-ea338b518519"
+}
+
+
+### WRONG POSTing a new vaccination registration
+
+POST {{url}}/registration
+Content-Type: application/json
+
+{
+    "vaccinatinRegistrationId": "e5e07b37-3709-45bd-a5b6-d5b3270186b1",
+    "name" : "Trump",
+    "firstName" : "Donald",
+    "email" : "donald@maga.eu",
+    "yearOfBirth" : 1952,
+    "vaccinationDate": "1/1/2022",
+    "vaccinName": "BioNTech, Pfizer",
+    "location": "Gent Expo"
+}
+
