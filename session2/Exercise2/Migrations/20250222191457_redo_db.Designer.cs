@@ -3,6 +3,7 @@ using Exercise2.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exercise2.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20250222191457_redo_db")]
+    partial class redo_db
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,6 +72,9 @@ namespace Exercise2.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TravellerId")
+                        .IsUnique();
+
                     b.ToTable("Passports");
 
                     b.HasData(
@@ -118,13 +124,7 @@ namespace Exercise2.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("PassportId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PassportId")
-                        .IsUnique();
 
                     b.ToTable("Travellers");
 
@@ -132,14 +132,12 @@ namespace Exercise2.Migrations
                         new
                         {
                             Id = 1,
-                            FullName = "John Doe",
-                            PassportId = 1
+                            FullName = "John Doe"
                         },
                         new
                         {
                             Id = 2,
-                            FullName = "Jane Doe",
-                            PassportId = 2
+                            FullName = "Jane Doe"
                         });
                 });
 
@@ -163,6 +161,17 @@ namespace Exercise2.Migrations
                     b.ToTable("TravellerDestination");
                 });
 
+            modelBuilder.Entity("Exercise2.Models.Passport", b =>
+                {
+                    b.HasOne("Exercise2.Models.Traveller", "Traveller")
+                        .WithOne("Passport")
+                        .HasForeignKey("Exercise2.Models.Passport", "TravellerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Traveller");
+                });
+
             modelBuilder.Entity("Exercise2.Models.Tour", b =>
                 {
                     b.HasOne("Exercise2.Models.Guide", "Guide")
@@ -172,17 +181,6 @@ namespace Exercise2.Migrations
                         .IsRequired();
 
                     b.Navigation("Guide");
-                });
-
-            modelBuilder.Entity("Exercise2.Models.Traveller", b =>
-                {
-                    b.HasOne("Exercise2.Models.Passport", "Passport")
-                        .WithOne("Traveller")
-                        .HasForeignKey("Exercise2.Models.Traveller", "PassportId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Passport");
                 });
 
             modelBuilder.Entity("Exercise2.Models.TravellerDestination", b =>
@@ -215,10 +213,9 @@ namespace Exercise2.Migrations
                     b.Navigation("Tours");
                 });
 
-            modelBuilder.Entity("Exercise2.Models.Passport", b =>
+            modelBuilder.Entity("Exercise2.Models.Traveller", b =>
                 {
-                    b.Navigation("Traveller")
-                        .IsRequired();
+                    b.Navigation("Passport");
                 });
 #pragma warning restore 612, 618
         }

@@ -16,10 +16,19 @@ builder.Services.AddScoped<IApplicationService, ApplicationService>();
 
 var app = builder.Build();
 
-app.MapGet("/travellers", async (IApplicationService applicationService) =>
+// This endpoint DOES NOT WORK like it should
+// app.MapGet("/travellers", async (IApplicationService applicationService, IMapper mapper) =>
+// {
+//     var travellers = await applicationService.GetTravellers();    
+//     var mappedTravellers = mapper.Map<List<TravellerDTO>>(travellers);
+//     return Results.Ok(travellers);
+// });
+
+app.MapGet("/travellers", async (IApplicationService applicationService, IMapper mapper) =>
 {
-    var travellers = await applicationService.GetTravellers();
-    return Results.Ok(travellers);
+    var travellers = await applicationService.GetTravellers();    
+    var mappedTravellers = mapper.Map<List<TravellerDTO>>(travellers);
+    return Results.Ok(mappedTravellers);  // Return mapped DTOs instead of raw travellers
 });
 
 

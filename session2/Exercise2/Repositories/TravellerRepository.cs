@@ -14,6 +14,9 @@ public class TravellerRepository : ITravellerRepository
 
     public async Task<List<Traveller>> GetTravellers()
     {
-        return await _context.Travellers.ToListAsync();
+        // return await _context.Travellers.ToListAsync();
+        return await _context.Travellers
+        .Include(t => t.Passport)  // Include passport information
+        .ToListAsync();
     }
 }

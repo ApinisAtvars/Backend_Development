@@ -14,12 +14,23 @@ public class ApplicationContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // One-to-One relationship between Traveller and Passport
-        modelBuilder.Entity<Traveller>()
-            .HasOne(t => t.Passport)
-            .WithOne(p => p.Traveller)
-            .HasForeignKey<Passport>(p => p.TravellerId)
+        // Redundant to configure relationship from both sides
+
+        // // One-to-One relationship between Traveller and Passport
+        // modelBuilder.Entity<Traveller>()
+        //     .HasOne(t => t.Passport)
+        //     .WithOne(p => p.Traveller)
+        //     .HasForeignKey<Passport>(p => p.TravellerId)
+        //     .IsRequired();
+
+
+        // One-to-One relationship between Passport and Traveller
+        modelBuilder.Entity<Passport>()
+            .HasOne(p => p.Traveller)
+            .WithOne(t => t.Passport)
+            .HasForeignKey<Traveller>(t => t.PassportId)
             .IsRequired();
+
         // One-to-Many relationship between Guide and Tour
         modelBuilder.Entity<Guide>()
             .HasMany(g => g.Tours)
@@ -34,8 +45,8 @@ public class ApplicationContext : DbContext
 
         // Seed data
         modelBuilder.Entity<Traveller>().HasData(
-            new Traveller { Id = 1, FullName = "John Doe" },
-            new Traveller { Id = 2, FullName = "Jane Doe" }
+            new Traveller { Id = 1, FullName = "John Doe", PassportId = 1 },
+            new Traveller { Id = 2, FullName = "Jane Doe", PassportId = 2 }
         );
 
         modelBuilder.Entity<Passport>().HasData(
