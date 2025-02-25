@@ -35,6 +35,18 @@ namespace Exercise2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Destinations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Paris"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "London"
+                        });
                 });
 
             modelBuilder.Entity("Exercise2.Models.Guide", b =>
@@ -51,6 +63,18 @@ namespace Exercise2.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Guides");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Atvars Apenes"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Violetta Viktoriia Nguyen"
+                        });
                 });
 
             modelBuilder.Entity("Exercise2.Models.Passport", b =>
@@ -64,9 +88,6 @@ namespace Exercise2.Migrations
                     b.Property<string>("PassportNumber")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("TravellerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Passports");
@@ -75,14 +96,12 @@ namespace Exercise2.Migrations
                         new
                         {
                             Id = 1,
-                            PassportNumber = "123456",
-                            TravellerId = 1
+                            PassportNumber = "123456"
                         },
                         new
                         {
                             Id = 2,
-                            PassportNumber = "654321",
-                            TravellerId = 2
+                            PassportNumber = "654321"
                         });
                 });
 
@@ -105,6 +124,26 @@ namespace Exercise2.Migrations
                     b.HasIndex("GuideId");
 
                     b.ToTable("Tours");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GuideId = 1,
+                            Title = "Paris Tour"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GuideId = 2,
+                            Title = "London Tour"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            GuideId = 2,
+                            Title = "Paris Tour"
+                        });
                 });
 
             modelBuilder.Entity("Exercise2.Models.Traveller", b =>
@@ -148,17 +187,12 @@ namespace Exercise2.Migrations
                     b.Property<int>("DestinationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TravellersId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TravellerId")
                         .HasColumnType("int");
 
-                    b.HasKey("DestinationId", "TravellersId");
+                    b.HasKey("DestinationId", "TravellerId");
 
                     b.HasIndex("TravellerId");
-
-                    b.HasIndex("TravellersId");
 
                     b.ToTable("TravellerDestination");
                 });
@@ -187,27 +221,17 @@ namespace Exercise2.Migrations
 
             modelBuilder.Entity("Exercise2.Models.TravellerDestination", b =>
                 {
-                    b.HasOne("Exercise2.Models.Destination", "Destination")
+                    b.HasOne("Exercise2.Models.Destination", null)
                         .WithMany()
                         .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Exercise2.Models.Traveller", "Traveller")
+                    b.HasOne("Exercise2.Models.Traveller", null)
                         .WithMany()
                         .HasForeignKey("TravellerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Exercise2.Models.Traveller", null)
-                        .WithMany()
-                        .HasForeignKey("TravellersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Destination");
-
-                    b.Navigation("Traveller");
                 });
 
             modelBuilder.Entity("Exercise2.Models.Guide", b =>
@@ -217,8 +241,7 @@ namespace Exercise2.Migrations
 
             modelBuilder.Entity("Exercise2.Models.Passport", b =>
                 {
-                    b.Navigation("Traveller")
-                        .IsRequired();
+                    b.Navigation("Traveller");
                 });
 #pragma warning restore 612, 618
         }

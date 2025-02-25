@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Exercise2.Migrations
 {
     /// <inheritdoc />
-    public partial class first_migration : Migration
+    public partial class deleted_all_the_migrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,17 +47,17 @@ namespace Exercise2.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Travellers",
+                name: "Passports",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    FullName = table.Column<string>(type: "longtext", nullable: true)
+                    PassportNumber = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Travellers", x => x.Id);
+                    table.PrimaryKey("PK_Passports", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -84,22 +84,22 @@ namespace Exercise2.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Passports",
+                name: "Travellers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    PassportNumber = table.Column<string>(type: "longtext", nullable: true)
+                    FullName = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TravellerId = table.Column<int>(type: "int", nullable: false)
+                    PassportId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Passports", x => x.Id);
+                    table.PrimaryKey("PK_Travellers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Passports_Travellers_TravellerId",
-                        column: x => x.TravellerId,
-                        principalTable: "Travellers",
+                        name: "FK_Travellers_Passports_PassportId",
+                        column: x => x.PassportId,
+                        principalTable: "Passports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -109,13 +109,12 @@ namespace Exercise2.Migrations
                 name: "TravellerDestination",
                 columns: table => new
                 {
-                    DestinationId = table.Column<int>(type: "int", nullable: false),
-                    TravellersId = table.Column<int>(type: "int", nullable: false),
-                    TravellerId = table.Column<int>(type: "int", nullable: false)
+                    TravellerId = table.Column<int>(type: "int", nullable: false),
+                    DestinationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TravellerDestination", x => new { x.DestinationId, x.TravellersId });
+                    table.PrimaryKey("PK_TravellerDestination", x => new { x.DestinationId, x.TravellerId });
                     table.ForeignKey(
                         name: "FK_TravellerDestination_Destinations_DestinationId",
                         column: x => x.DestinationId,
@@ -128,38 +127,54 @@ namespace Exercise2.Migrations
                         principalTable: "Travellers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TravellerDestination_Travellers_TravellersId",
-                        column: x => x.TravellersId,
-                        principalTable: "Travellers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.InsertData(
-                table: "Travellers",
-                columns: new[] { "Id", "FullName" },
+                table: "Destinations",
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "John Doe" },
-                    { 2, "Jane Doe" }
+                    { 1, "Paris" },
+                    { 2, "London" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Guides",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Atvars Apenes" },
+                    { 2, "Violetta Viktoriia Nguyen" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Passports",
-                columns: new[] { "Id", "PassportNumber", "TravellerId" },
+                columns: new[] { "Id", "PassportNumber" },
                 values: new object[,]
                 {
-                    { 1, "123456", 1 },
-                    { 2, "654321", 2 }
+                    { 1, "123456" },
+                    { 2, "654321" }
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Passports_TravellerId",
-                table: "Passports",
-                column: "TravellerId",
-                unique: true);
+            migrationBuilder.InsertData(
+                table: "Tours",
+                columns: new[] { "Id", "GuideId", "Title" },
+                values: new object[,]
+                {
+                    { 1, 1, "Paris Tour" },
+                    { 2, 2, "London Tour" },
+                    { 3, 2, "Paris Tour" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Travellers",
+                columns: new[] { "Id", "FullName", "PassportId" },
+                values: new object[,]
+                {
+                    { 1, "John Doe", 1 },
+                    { 2, "Jane Doe", 2 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tours_GuideId",
@@ -172,17 +187,15 @@ namespace Exercise2.Migrations
                 column: "TravellerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TravellerDestination_TravellersId",
-                table: "TravellerDestination",
-                column: "TravellersId");
+                name: "IX_Travellers_PassportId",
+                table: "Travellers",
+                column: "PassportId",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Passports");
-
             migrationBuilder.DropTable(
                 name: "Tours");
 
@@ -197,6 +210,9 @@ namespace Exercise2.Migrations
 
             migrationBuilder.DropTable(
                 name: "Travellers");
+
+            migrationBuilder.DropTable(
+                name: "Passports");
         }
     }
 }
