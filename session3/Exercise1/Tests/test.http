@@ -1,0 +1,53 @@
+@url = http://localhost:5087
+
+### GETting all travellers
+GET {{url}}/travellers
+
+### GETting a single traveller
+
+GET {{url}}/travellers/1
+
+### GETting all destinations
+
+GET {{url}}/destinations
+
+### GETting all guides
+
+GET {{url}}/guides
+
+### GETting guides with tour information
+
+GET {{url}}/guides-with-tours
+
+### WRONG POSTing a new traveller
+
+POST {{url}}/traveller/thiswontwork/123456
+
+### RIGHT POSTing a new traveller
+
+POST {{url}}/traveller/POSTed Traveller/1234565432
+
+### GETting guide WIHTOUT tours
+
+GET {{url}}/guides/1?includeTours=false
+
+### GETting guide WITH tours
+
+GET {{url}}/guides/2?includeTours=true
+
+### POSTing a new destination
+
+POST {{url}}/destinations
+Content-Type: application/json
+
+{
+    "name": "New Destination",
+    "description": "This is a new destination",
+    "country": "New Country",
+    "city": "New City",
+    "touristRating": 5
+}
+
+### POSTing a destination to a traveller
+
+POST {{url}}/travellers/2/destinations/12
