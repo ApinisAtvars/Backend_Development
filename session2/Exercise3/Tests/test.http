@@ -1,0 +1,92 @@
+@url = http://localhost:5225
+
+### Setting the dummy data
+GET {{url}}/setup
+
+### GETting all cars
+
+GET {{url}}/cars
+
+
+### GETting all brands
+
+GET {{url}}/brands
+
+### GETting a car by ID
+
+GET {{url}}/cars/67c5f78038043f5e9dae378e
+
+### GETting a brand by ID
+
+GET {{url}}/brands/67c5f6fc38043f5e9dae378a
+
+### POSTing a new car
+
+POST {{url}}/cars
+Content-Type: application/json
+
+{
+    "brand": {
+  "id": "67c5f6fc38043f5e9dae378a",
+  "name": "Volkswagen",
+  "country": "Germany",
+  "logo": null,
+  "createdOn": "0001-01-01T00:00:00Z"
+},
+    "name": "A3"
+}
+
+### POSTing a new brand
+
+POST {{url}}/brands
+Content-Type: application/json
+
+{
+    "name": "Audi",
+    "country": "Germany",
+    "logo": null
+}
+
+### POSTing a new brand with missing data (No country) SHOULDN'T WORK
+
+POST {{url}}/brands
+Content-Type: application/json
+
+{
+    "name": "Audi"
+}
+
+### POSTing a new brand with missing data (No name) SHOULDN'T WORK
+
+POST {{url}}/brands
+Content-Type: application/json
+
+{
+    "country": "Germany",
+    "logo": null
+}
+
+
+### POSTing a new car with missing data (No brand) SHOULDN'T WORK
+
+POST {{url}}/cars
+Content-Type: application/json
+
+{
+    "name": "A3"
+}
+
+### POSTing a new car with missing data (No name) SHOULDN'T WORK
+
+POST {{url}}/cars
+Content-Type: application/json
+
+{
+    "brand": {
+  "id": "67c5f6fc38043f5e9dae378a",
+  "name": "Volkswagen",
+  "country": "Germany",
+  "logo": null,
+  "createdOn": "0001-01-01T00:00:00Z"
+}
+}

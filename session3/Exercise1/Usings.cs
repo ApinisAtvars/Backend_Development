@@ -11,3 +11,4 @@ global using System.ComponentModel.DataAnnotations.Schema;
 global using Microsoft.EntityFrameworkCore;
 global using AutoMapper;
 global using FluentValidation;
+global using Asp.Versioning;

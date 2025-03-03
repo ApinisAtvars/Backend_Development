@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "kzO4PN2kMcI=",
+  "dgSpecHash": "etNoMj8avw0=",
   "success": true,
   "projectFilePath": "C:\\Users\\Atvar\\Desktop\\year2\\Backend_Development\\Backend_Development\\session3\\Exercise1\\Exercise1.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Atvar\\.nuget\\packages\\asp.versioning.abstractions\\8.0.0\\asp.versioning.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Atvar\\.nuget\\packages\\asp.versioning.http\\8.0.0\\asp.versioning.http.8.0.0.nupkg.sha512",
     "C:\\Users\\Atvar\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\Atvar\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
     "C:\\Users\\Atvar\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",

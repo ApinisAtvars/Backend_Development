@@ -51,3 +51,5 @@ Content-Type: application/json
 ### POSTing a destination to a traveller
 
 POST {{url}}/travellers/2/destinations/12
+
+

@@ -1,0 +1,9 @@
+# To-Do List
+
+<!-- 1. Add the following methods to the CarService.cs
+    1. AddCar
+    2. AddBrand -->
+<!-- 2. Use automapper when returning data from the API. -->
+<!-- 3. Remove all the requests that involve IBrandRepository from Program.cs -->
+<!-- 4. Add validation for Car (Name and Brand are mandatory) -->
+<!-- 5. Add validation for Brand (Name and Country are mandatory) -->
