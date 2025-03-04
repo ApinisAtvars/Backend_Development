@@ -1,5 +1,6 @@
 namespace Exercise1.RouteGroups;
 
+
 public static class GuidesRouteGroup
 {
     public static RouteGroupBuilder GroupGuides(this RouteGroupBuilder group)
@@ -37,6 +38,22 @@ public static class GuidesRouteGroup
             }
         });
 
+        group.MapGet("/download", async (IApplicationService applicationService, IMapper mapper) =>
+            {
+                var guides = await applicationService.GetGuides();
+                var mappedGuides = mapper.Map<List<GuideDTO>>(guides);
+
+                // Convert to CSV
+                using var memoryStream = new MemoryStream();
+                using var writer = new StreamWriter(memoryStream, Encoding.UTF8);
+                using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+
+                csv.WriteRecords(mappedGuides);
+                writer.Flush();
+
+                return Results.File(memoryStream.ToArray(), "text/csv", "guides.csv");
+            });
+
         return group;
-    }
+        }
 }

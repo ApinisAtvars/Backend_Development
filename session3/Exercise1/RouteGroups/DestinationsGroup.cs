@@ -2,11 +2,8 @@ namespace Exercise1.RouteGroups;
 
 public static class DestinationsRouteGroup
 {
-    public static RouteGroupBuilder GroupDestinations(this RouteGroupBuilder group)
+    public static RouteGroupBuilder GroupDestinationsVersion1(this RouteGroupBuilder group)
     {
-        group.WithApiVersionSet(versionSet)
-         .MapToApiVersion(new ApiVersion(1, 0))
-         .MapToApiVersion(new ApiVersion(2, 0));
         group.MapGet("", async (IApplicationService applicationService, IMapper mapper) =>
         {
             var destinations = await applicationService.GetDestinations();
@@ -21,6 +18,20 @@ public static class DestinationsRouteGroup
             return Results.Created($"/destinations/{mappedDestination.DestinationId}", mappedDestination);
         });
 
+        return group;
+    }
+
+    public static RouteGroupBuilder GroupDestinationsVersion2(this RouteGroupBuilder group)
+    {
+        group.MapGet("", async (IApplicationService applicationService, IMapper mapper) =>
+        {
+            var destinations = await applicationService.GetDestinations();
+            var mappedDestinations = mapper.Map<List<DestinationDTOV2>>(destinations);
+
+            return Results.Ok(mappedDestinations);
+        });
+
+        
         return group;
     }
 }

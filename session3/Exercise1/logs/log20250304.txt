@@ -1,0 +1,225 @@
+2025-03-04 15:03:49.328 +01:00 [DBG] Hosting starting
+2025-03-04 15:03:49.365 +01:00 [DBG] Middleware configuration started with options: {AllowedHosts = *, AllowEmptyHosts = True, IncludeFailureMessage = True}
+2025-03-04 15:03:49.368 +01:00 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-03-04 15:03:49.377 +01:00 [INF] Now listening on: http://localhost:5087
+2025-03-04 15:03:49.378 +01:00 [DBG] Loaded hosting startup assembly Exercise1
+2025-03-04 15:03:49.378 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-03-04 15:03:49.380 +01:00 [INF] Hosting environment: Development
+2025-03-04 15:03:49.383 +01:00 [INF] Content root path: C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1
+2025-03-04 15:03:49.383 +01:00 [DBG] Hosting started
+2025-03-04 15:03:51.043 +01:00 [DBG] Connection id "0HNAR4LI43IPP" accepted.
+2025-03-04 15:03:51.044 +01:00 [DBG] Connection id "0HNAR4LI43IPP" started.
+2025-03-04 15:03:51.058 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:5087/travellers - null null
+2025-03-04 15:03:51.128 +01:00 [DBG] 1 candidate(s) found for the request path '/travellers'
+2025-03-04 15:03:51.132 +01:00 [DBG] Endpoint 'HTTP: GET /travellers/' with route pattern '/travellers/' is valid for the request path '/travellers'
+2025-03-04 15:03:51.137 +01:00 [DBG] Request matched endpoint 'HTTP: GET /travellers/'
+2025-03-04 15:03:51.140 +01:00 [INF] Executing endpoint 'HTTP: GET /travellers/'
+2025-03-04 15:03:51.264 +01:00 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-03-04 15:03:51.323 +01:00 [INF] Travellers retrieved successfully
+2025-03-04 15:03:51.485 +01:00 [DBG] The index {'DestinationId'} was not created on entity type 'TravellerDestination' as the properties are already covered by the index {'DestinationId', 'TravellerId'}.
+2025-03-04 15:03:51.577 +01:00 [DBG] Entity Framework Core 9.0.0 initialized 'ApplicationContext' using provider 'Pomelo.EntityFrameworkCore.MySql:9.0.0-preview.2.efcore.9.0.0' with options: ServerVersion=8.0.36-mysql 
+2025-03-04 15:03:51.593 +01:00 [DBG] Compiling query expression: 
+'DbSet<Traveller>()
+    .Include(t => t.Passport)'
+2025-03-04 15:03:51.631 +01:00 [DBG] Including navigation: 'Traveller.Passport'.
+2025-03-04 15:03:51.732 +01:00 [DBG] Generated query execution expression: 
+'queryContext => SingleQueryingEnumerable.Create<Traveller>(
+    relationalQueryContext: (RelationalQueryContext)queryContext, 
+    relationalCommandResolver: parameters => [LIFTABLE Constant: RelationalCommandCache.QueryExpression(
+        Client Projections:
+            0 -> Dictionary<IProperty, int> { [Property: Traveller.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Traveller.FullName (string), 1], [Property: Traveller.PassportId (int) Required FK Index, 2] }
+            1 -> Dictionary<IProperty, int> { [Property: Passport.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 3], [Property: Passport.PassportNumber (string), 4] }
+        SELECT t.Id, t.FullName, t.PassportId, p.Id, p.PassportNumber
+        FROM Travellers AS t
+        INNER JOIN Passports AS p ON t.PassportId == p.Id) | Resolver: c => new RelationalCommandCache(
+        c.Dependencies.MemoryCache, 
+        c.RelationalDependencies.QuerySqlGeneratorFactory, 
+        c.RelationalDependencies.RelationalParameterBasedSqlProcessorFactory, 
+        Client Projections:
+            0 -> Dictionary<IProperty, int> { [Property: Traveller.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 0], [Property: Traveller.FullName (string), 1], [Property: Traveller.PassportId (int) Required FK Index, 2] }
+            1 -> Dictionary<IProperty, int> { [Property: Passport.Id (int) Required PK AfterSave:Throw ValueGenerated.OnAdd, 3], [Property: Passport.PassportNumber (string), 4] }
+        SELECT t.Id, t.FullName, t.PassportId, p.Id, p.PassportNumber
+        FROM Travellers AS t
+        INNER JOIN Passports AS p ON t.PassportId == p.Id, 
+        False, 
+        new HashSet<string>(
+            new string[]{ }, 
+            StringComparer.Ordinal
+        )
+    )].GetRelationalCommandTemplate(parameters), 
+    readerColumns: null, 
+    shaper: (queryContext, dataReader, resultContext, resultCoordinator) => 
+    {
+        Traveller entity;
+        Passport entity;
+        entity = 
+        {
+            MaterializationContext materializationContext1;
+            IEntityType entityType1;
+            Traveller instance1;
+            InternalEntityEntry entry1;
+            bool hasNullKey1;
+            materializationContext1 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance1 = default(Traveller);
+            entry1 = queryContext.TryGetEntry(
+                key: Key: Traveller.Id PK, 
+                keyValues: new object[]{ (object)dataReader.GetInt32(0) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey1);
+            !(hasNullKey1) ? entry1 != default(InternalEntityEntry) ? 
+            {
+                entityType1 = entry1.EntityType;
+                return instance1 = (Traveller)entry1.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot1;
+                shadowSnapshot1 = Snapshot;
+                entityType1 = EntityType: Traveller;
+                instance1 = switch (entityType1)
+                {
+                    case EntityType: Traveller: 
+                        {
+                            return 
+                            {
+                                Traveller instance;
+                                instance = new Traveller();
+                                instance.<Id>k__BackingField = dataReader.GetInt32(0);
+                                instance.<FullName>k__BackingField = dataReader.IsDBNull(1) ? default(string) : dataReader.GetString(1);
+                                instance.<PassportId>k__BackingField = dataReader.GetInt32(2);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext1.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: EntityType: Traveller) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(Traveller)
+                }
+                ;
+                entry1 = entityType1 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType1, 
+                    entity: instance1, 
+                    snapshot: shadowSnapshot1);
+                return instance1;
+            } : default(void);
+            return instance1;
+        };
+        entity = 
+        {
+            MaterializationContext materializationContext2;
+            IEntityType entityType2;
+            Passport instance2;
+            InternalEntityEntry entry2;
+            bool hasNullKey2;
+            materializationContext2 = new MaterializationContext(
+                [LIFTABLE Constant: ValueBuffer | Resolver: _ => (object)ValueBuffer.Empty], 
+                queryContext.Context
+            );
+            instance2 = default(Passport);
+            entry2 = queryContext.TryGetEntry(
+                key: Key: Passport.Id PK, 
+                keyValues: new object[]{ (object)dataReader.GetInt32(3) }, 
+                throwOnNullKey: True, 
+                hasNullKey: hasNullKey2);
+            !(hasNullKey2) ? entry2 != default(InternalEntityEntry) ? 
+            {
+                entityType2 = entry2.EntityType;
+                return instance2 = (Passport)entry2.Entity;
+            } : 
+            {
+                ISnapshot shadowSnapshot2;
+                shadowSnapshot2 = Snapshot;
+                entityType2 = EntityType: Passport;
+                instance2 = switch (entityType2)
+                {
+                    case EntityType: Passport: 
+                        {
+                            return 
+                            {
+                                Passport instance;
+                                instance = new Passport();
+                                instance.<Id>k__BackingField = dataReader.GetInt32(3);
+                                instance.<PassportNumber>k__BackingField = dataReader.IsDBNull(4) ? default(string) : dataReader.GetString(4);
+                                (instance is IInjectableService) ? ((IInjectableService)instance).Injected(
+                                    context: materializationContext2.Context, 
+                                    entity: instance, 
+                                    queryTrackingBehavior: TrackAll, 
+                                    structuralType: EntityType: Passport) : default(void);
+                                return instance;
+                            }}
+                    default: 
+                        default(Passport)
+                }
+                ;
+                entry2 = entityType2 == default(IEntityType) ? default(InternalEntityEntry) : queryContext.StartTracking(
+                    entityType: entityType2, 
+                    entity: instance2, 
+                    snapshot: shadowSnapshot2);
+                return instance2;
+            } : default(void);
+            return instance2;
+        };
+        ShaperProcessingExpressionVisitor.IncludeReference<Traveller, Traveller, Passport>(
+            queryContext: queryContext, 
+            entity: entity, 
+            relatedEntity: entity, 
+            navigation: [LIFTABLE Constant: Navigation: Traveller.Passport (Passport) ToPrincipal Passport Inverse: Traveller | Resolver: namelessParameter{0} => namelessParameter{0}.Dependencies.Model.FindEntityType("Exercise1.Models.Traveller").FindNavigation("Passport")], 
+            inverseNavigation: [LIFTABLE Constant: Navigation: Passport.Traveller (Traveller) ToDependent Traveller Inverse: Passport | Resolver: namelessParameter{1} => namelessParameter{1}.Dependencies.Model.FindEntityType("Exercise1.Models.Passport").FindNavigation("Traveller")], 
+            fixup: (namelessParameter{2}, namelessParameter{3}) => 
+            {
+                namelessParameter{2}.<Passport>k__BackingField = namelessParameter{3};
+                return namelessParameter{3}.<Traveller>k__BackingField = namelessParameter{2};
+            }, 
+            trackingQuery: True);
+        return entity;
+    }, 
+    contextType: Exercise1.Contexts.ApplicationContext, 
+    standAloneStateManager: False, 
+    detailedErrorsEnabled: False, 
+    threadSafetyChecksEnabled: True)'
+2025-03-04 15:03:51.752 +01:00 [DBG] Creating DbConnection.
+2025-03-04 15:03:51.755 +01:00 [DBG] Created DbConnection. (2ms).
+2025-03-04 15:03:51.758 +01:00 [DBG] Opening connection to database 'bd0202' on server 'localhost'.
+2025-03-04 15:03:51.783 +01:00 [DBG] Opened connection to database 'bd0202' on server 'localhost'.
+2025-03-04 15:03:51.786 +01:00 [DBG] Creating DbCommand for 'ExecuteReader'.
+2025-03-04 15:03:51.789 +01:00 [DBG] Created DbCommand for 'ExecuteReader' (1ms).
+2025-03-04 15:03:51.791 +01:00 [DBG] Initialized DbCommand for 'ExecuteReader' (5ms).
+2025-03-04 15:03:51.796 +01:00 [DBG] Executing DbCommand [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`Id`, `t`.`FullName`, `t`.`PassportId`, `p`.`Id`, `p`.`PassportNumber`
+FROM `Travellers` AS `t`
+INNER JOIN `Passports` AS `p` ON `t`.`PassportId` = `p`.`Id`
+2025-03-04 15:03:51.819 +01:00 [INF] Executed DbCommand (20ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT `t`.`Id`, `t`.`FullName`, `t`.`PassportId`, `p`.`Id`, `p`.`PassportNumber`
+FROM `Travellers` AS `t`
+INNER JOIN `Passports` AS `p` ON `t`.`PassportId` = `p`.`Id`
+2025-03-04 15:03:51.841 +01:00 [DBG] Context 'ApplicationContext' started tracking 'Traveller' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.857 +01:00 [DBG] The navigation 'Traveller.Passport' was detected as changed. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.859 +01:00 [DBG] Context 'ApplicationContext' started tracking 'Passport' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.863 +01:00 [DBG] Context 'ApplicationContext' started tracking 'Traveller' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.863 +01:00 [DBG] The navigation 'Traveller.Passport' was detected as changed. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.864 +01:00 [DBG] Context 'ApplicationContext' started tracking 'Passport' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.865 +01:00 [DBG] Context 'ApplicationContext' started tracking 'Traveller' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.866 +01:00 [DBG] The navigation 'Traveller.Passport' was detected as changed. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.867 +01:00 [DBG] Context 'ApplicationContext' started tracking 'Passport' entity. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see key values.
+2025-03-04 15:03:51.870 +01:00 [DBG] Closing data reader to 'bd0202' on server 'localhost'.
+2025-03-04 15:03:51.878 +01:00 [DBG] A data reader for 'bd0202' on server 'localhost' is being disposed after spending 52ms reading results.
+2025-03-04 15:03:51.881 +01:00 [DBG] Closing connection to database 'bd0202' on server 'localhost'.
+2025-03-04 15:03:51.883 +01:00 [DBG] Closed connection to database 'bd0202' on server 'localhost' (2ms).
+2025-03-04 15:03:51.890 +01:00 [INF] Setting HTTP status code 200.
+2025-03-04 15:03:51.896 +01:00 [INF] Writing value of type 'List`1' as Json.
+2025-03-04 15:03:51.904 +01:00 [INF] Executed endpoint 'HTTP: GET /travellers/'
+2025-03-04 15:03:51.907 +01:00 [DBG] 'ApplicationContext' disposed.
+2025-03-04 15:03:51.908 +01:00 [DBG] Connection id "0HNAR4LI43IPP" received FIN.
+2025-03-04 15:03:51.910 +01:00 [DBG] Connection id "0HNAR4LI43IPP" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-03-04 15:03:51.910 +01:00 [DBG] Disposing connection to database 'bd0202' on server 'localhost'.
+2025-03-04 15:03:51.911 +01:00 [DBG] Connection id "0HNAR4LI43IPP" disconnecting.
+2025-03-04 15:03:51.914 +01:00 [DBG] Disposed connection to database 'bd0202' on server 'localhost' (3ms).
+2025-03-04 15:03:51.915 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:5087/travellers - 200 null application/json; charset=utf-8 858.7117ms
+2025-03-04 15:03:51.922 +01:00 [DBG] Connection id "0HNAR4LI43IPP" stopped.
+2025-03-04 15:04:13.263 +01:00 [INF] Application is shutting down...
+2025-03-04 15:04:13.263 +01:00 [DBG] Hosting stopping
+2025-03-04 15:04:13.268 +01:00 [DBG] Hosting stopped

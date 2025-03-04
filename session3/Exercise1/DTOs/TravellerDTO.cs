@@ -12,6 +12,13 @@ public class DestinationDTO
     public string Name { get; set; }
 }
 
+public class DestinationDTOV2
+{
+    public int DestinationId { get; set; }  // Changed from Id
+    public string Name { get; set; }
+    public int Price { get; set; } = 1000;
+}
+
 public class GuideDTO
 {
     public int GuideId { get; set; }  // Changed from Id
@@ -66,6 +73,10 @@ public class ProfileDTO : Profile
         CreateMap<Tour, TourDTO>()
             .ForMember(dest => dest.TourId, opt => opt.MapFrom(src => src.Id))
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Title));
+
+        CreateMap<Destination, DestinationDTOV2>()
+            .ForMember(dest => dest.DestinationId, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name));
         
     }
 }
