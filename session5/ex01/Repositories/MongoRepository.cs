@@ -9,6 +9,7 @@ public interface IMongoRepository
     Task AddBrands(List<Brand> brands);
     Task<List<Sneaker>> GetAllSneakers();
     Task AddOccasions(List<Occasion> occasions);
+    Task<Sneaker> GetSneaker(string id);
 }
 
 public class MongoRepository : IMongoRepository
@@ -61,4 +62,8 @@ public class MongoRepository : IMongoRepository
         await _occasions.InsertManyAsync(occasions);
     }
     
+    public async Task<Sneaker> GetSneaker(string id)
+    {
+        return await _sneakers.Find(s => s.SneakerId == id).FirstOrDefaultAsync();
+    }
 }

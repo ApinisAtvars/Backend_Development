@@ -8,6 +8,7 @@ public interface IMongoService
     Task AddSneaker(NewSneakerDTO newSneaker);
     Task<List<Sneaker>> GetAllSneakers();
     Task SetupData();
+    Task<Sneaker> GetSneaker(string id);
 }
 
 public class MongoService : IMongoService
@@ -53,6 +54,11 @@ public class MongoService : IMongoService
     public async Task<List<Sneaker>> GetAllSneakers()
     {
         return await _repository.GetAllSneakers();
+    }
+
+    public async Task<Sneaker> GetSneaker(string id)
+    {
+        return await _repository.GetSneaker(id);
     }
 
         public async Task SetupData()

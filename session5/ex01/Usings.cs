@@ -12,3 +12,4 @@ global using Sneakers.API.Repositories;
 global using Sneakers.API.DTOs;
 global using Sneakers.API.Services;
 global using Sneakers.API.Validators;
+global using Sneakers.API.Middleware;

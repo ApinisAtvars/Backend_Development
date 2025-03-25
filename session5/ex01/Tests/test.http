@@ -1,4 +1,5 @@
 @url = http://localhost:5083
+@apikey = secret key
 
 ### Seed data
 GET {{url}}/seed
@@ -6,6 +7,7 @@ GET {{url}}/seed
 ### GET all brands
 
 GET {{url}}/brands
+XApiKey: {{apikey}}
 
 ### GET all occasions
 
@@ -17,6 +19,7 @@ GET {{url}}/sneakers
 
 ### POST new sneaker
 POST {{url}}/sneakers
+XApiKey: {{apikey}}
 Content-Type: application/json
 
 {
@@ -24,8 +27,8 @@ Content-Type: application/json
     "price": 120,
     "stock": 10,
     "brand": {
-      "brandId": "67e2a9c1fb5dc482d6f9240a",
-      "name": "ASICS"
+        "brandId": "67e2a9c1fb5dc482d6f9240d",
+        "name": "PUMA"
     },
     "occasions": [
       {
@@ -39,3 +42,11 @@ Content-Type: application/json
     ]
     
 }
+
+### GET all sneakers with correct API key
+GET {{url}}/sneakers
+XApiKey: {{apikey}}
+
+### GET sneaker by ID
+GET {{url}}/sneakers/67e2a9c1fb5dc482d6f92412
+XApiKey: {{apikey}}

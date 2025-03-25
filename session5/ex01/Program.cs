@@ -1,8 +1,11 @@
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .Build();
+
 
 builder.Services.Configure<DatabaseSettings>(configuration.GetSection("MongoConnection"));
 
@@ -14,9 +17,21 @@ builder.Services.AddScoped<IMongoService, MongoService>();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
 
+// NEW STUFF
 
+var apiKeySettings = builder.Configuration.GetSection("ApiKeySettings");
+builder.Services.Configure<APIKeySettings>(apiKeySettings);
 
 var app = builder.Build();
+
+app.UseMiddleware<ApiKeyMiddleware>();
+
+
+
+
+
+
+
 
 // app.MapGet("/", () => "Hello World!");
 app.MapGet("/brands", async (IMongoService service) => await service.GetAllBrands());
@@ -52,5 +67,7 @@ app.MapPost("/sneakers", async (IMongoService service, NewSneakerDTO sneaker) =>
     }
     
 });
+
+app.MapGet("/sneakers/{id}", async (IMongoService service, string id) => await service.GetSneaker(id));
 
 app.Run();
