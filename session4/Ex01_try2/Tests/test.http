@@ -1,0 +1,15 @@
+@url = http://localhost:5260
+
+### GET all cars
+GET {{url}}/cars
+
+### POST a new car
+POST {{url}}/cars
+Content-Type: application/json
+
+{
+    "Brand": "Toyota",
+    "Model": "Corolla",
+    "Plate": "ABC-123",
+    "Color": "Red"
+}

@@ -1,6 +1,7 @@
-
 var builder = WebApplication.CreateBuilder(args);
 
+
+#region Logging
 builder.Logging.ClearProviders();
 // Serilog configuration		
 var logger = new LoggerConfiguration()
@@ -10,14 +11,21 @@ var logger = new LoggerConfiguration()
     .CreateLogger();
 // Register Serilog
 builder.Logging.AddSerilog(logger);
+#endregion
 
-
-
+#region Connection String
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); // Get the connection string from the appsettings.Development.json file.
+#endregion
 /*
 In the Dependency Injection container, create a new instance of the ApplicationContext class and register it as a service.
 */
+
+#region DBContext
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+#endregion
+
+
+#region DI of other services
 builder.Services.AddAutoMapper(typeof(Program));
 
 // Slower at startup, but with one line of code you have covered all the validators
@@ -26,6 +34,8 @@ builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssembli
 
 builder.Services.AddScoped<ITravellerRepository, TravellerRepository>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
+
+#endregion
 
 builder.Services.AddMemoryCache();
 

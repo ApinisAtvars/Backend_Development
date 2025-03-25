@@ -1,0 +1,46 @@
+@url = http://localhost:5083
+
+### GET cars
+
+GET {{url}}/cars
+
+
+### GET registrations
+GET {{url}}/registrations
+
+### PUT registration
+PUT {{url}}/registrations
+Content-Type: application/json
+
+{
+    "Id": 2,
+    "End": "2025-03-11T16:02:06"
+}
+
+### POST car
+POST {{url}}/cars
+Content-Type: application/json
+
+{
+    "id": 7,
+    "brand": "Toyota",
+    "model": "Corolla",
+    "plate": "ABC-123",
+    "color": "Red",
+    "registrationId": 1
+}
+
+### POST registration
+
+POST {{url}}/registrations
+Content-Type: application/json
+
+{
+    "registrationId": 5,
+    "plate": "XYZ-987",
+    "registrationStart": "2025-03-11T15:02:06",
+    "registrationEnd": "2025-04-11T15:02:06",
+    "carId": 7,
+    "totalPrice": 100.00000000000000000000000000,
+    "isFinished": false
+}

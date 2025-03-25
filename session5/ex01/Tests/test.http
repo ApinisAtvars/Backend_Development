@@ -1,0 +1,41 @@
+@url = http://localhost:5083
+
+### Seed data
+GET {{url}}/seed
+
+### GET all brands
+
+GET {{url}}/brands
+
+### GET all occasions
+
+GET {{url}}/occasions
+
+### GET all sneakers
+
+GET {{url}}/sneakers
+
+### POST new sneaker
+POST {{url}}/sneakers
+Content-Type: application/json
+
+{
+    "name": "Nike Air Max 90",
+    "price": 120,
+    "stock": 10,
+    "brand": {
+      "brandId": "67e2a9c1fb5dc482d6f9240a",
+      "name": "ASICS"
+    },
+    "occasions": [
+      {
+        "occasionId": "67e2a9c1fb5dc482d6f9240e",
+        "description": "Sports"
+      },
+      {
+        "occasionId": "67e2a9c1fb5dc482d6f9240f",
+        "description": "Casual"
+      }
+    ]
+    
+}
