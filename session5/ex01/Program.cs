@@ -71,3 +71,5 @@ app.MapPost("/sneakers", async (IMongoService service, NewSneakerDTO sneaker) =>
 app.MapGet("/sneakers/{id}", async (IMongoService service, string id) => await service.GetSneaker(id));
 
 app.Run();
+
+public partial class Program {}
