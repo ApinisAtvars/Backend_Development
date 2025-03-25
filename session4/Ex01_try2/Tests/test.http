@@ -13,3 +13,21 @@ Content-Type: application/json
     "Plate": "ABC-123",
     "Color": "Red"
 }
+
+### GET all registrations
+
+GET {{url}}/registrations
+
+
+### POST a new registration
+
+POST {{url}}/registrations
+Content-Type: application/json
+
+{
+    "start": "2025-03-24",
+    "carId": 5
+}
+
+### PUT registration
+PUT {{url}}/registrations/8

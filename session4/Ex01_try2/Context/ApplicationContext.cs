@@ -24,7 +24,7 @@ public class ApplicationContext : DbContext
                 Id = 1,
                 Brand = "Toyota",
                 Model = "Corolla",
-                Plate = "ABC123",
+                Plate = "ABC-123",
                 Color = "Red"
             },
             new Car
@@ -32,8 +32,16 @@ public class ApplicationContext : DbContext
                 Id = 2,
                 Brand = "Honda",
                 Model = "Civic",
-                Plate = "XYZ987",
+                Plate = "XYZ-987",
                 Color = "Blue"
+            },
+            new Car // One Extra Car that doesn't have a registration assigned to it, for integration tests
+            {
+                Id = 3,
+                Brand = "Suzuki",
+                Model = "Swift",
+                Plate = "DEF-456",
+                Color = "Green"
             }
         );
 
@@ -41,7 +49,6 @@ public class ApplicationContext : DbContext
             new Registration
             {
                 Id = 1,
-                Plate = "ABC-123",
                 Start = DateTime.Now,
                 End = DateTime.Now.AddMonths(1),
                 CarId = 1,
@@ -51,7 +58,6 @@ public class ApplicationContext : DbContext
             new Registration
             {
                 Id = 2,
-                Plate = "XYZ-987",
                 Start = DateTime.Now,
                 End = DateTime.Now.AddMonths(1),
                 CarId = 2,

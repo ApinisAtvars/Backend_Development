@@ -6,6 +6,9 @@ public interface IMySqlRepository
     Task<Car> AddCar(Car car);
     Task<Registration> AddRegistration(Registration registration);
     Task<List<Registration>> GetRegistrations();
+    Task<Car> GetCar(int id);
+    Task<Registration> PutRegistration(Registration registration);
+    Task<Registration> GetRegistration(int id);
 }
 
 public class MySqlRepository : IMySqlRepository
@@ -40,7 +43,30 @@ public class MySqlRepository : IMySqlRepository
 
     public async Task<List<Registration>> GetRegistrations()
     {
-        return await _context.Registrations.ToListAsync();
+        List<Registration> registrations = await _context.Registrations.ToListAsync();
+        foreach (Registration registration in registrations)
+        {
+            registration.Car = await GetCar(registration.CarId);
+        }
+        // Console.WriteLine(registrations);
+        return registrations;
+    }
+
+    public async Task<Car> GetCar(int id)
+    {
+        return await _context.Cars.FindAsync(id);
+    }
+
+    public async Task<Registration> PutRegistration(Registration registration)
+    {
+        _context.Entry(registration).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return registration;
+    }
+
+    public async Task<Registration> GetRegistration(int id)
+    {
+        return await _context.Registrations.FindAsync(id);
     }
 
 }

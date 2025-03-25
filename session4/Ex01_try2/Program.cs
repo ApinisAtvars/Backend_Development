@@ -12,19 +12,62 @@ builder.Services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssembli
 
 var app = builder.Build();
 
-app.MapGet("/cars", async (IMySqlService mySqlService, IMapper mapper) =>
+app.MapGet("/cars", async (IMySqlService mySqlService) =>
 {
-    List<Car> cars = await mySqlService.GetCars();
-    var carsDTO = mapper.Map<List<CarDTO>>(cars);
+    List<CarDTO> carsDTO = await mySqlService.GetCars();
     return Results.Ok(carsDTO);
 });
 
 app.MapPost("/cars", async (IMySqlService mySqlService, IMapper mapper, CarDTO carDTO) =>
+{ 
+    try
+    {
+        carDTO = await mySqlService.AddCar(carDTO);
+        return Results.Created($"/cars/{carDTO.CarId}", carDTO);
+    }
+    catch (ArgumentException e)
+    {
+        return Results.BadRequest(e.Message);
+    }
+    catch (Exception e)
+    {
+        return Results.InternalServerError(e.Message);
+    }
+    
+});
+
+app.MapGet("/registrations", async (IMySqlService mySqlService) =>
 {
-    var car = mapper.Map<Car>(carDTO);
-    car = await mySqlService.AddCar(car);
-    var mappedResult = mapper.Map<CarDTO>(car);
-    return Results.Created($"/cars/{mappedResult.CarId}", mappedResult);
+    List<RegistrationDTO> registrationsDTO = await mySqlService.GetRegistrations();
+    return Results.Ok(registrationsDTO);
+});
+
+app.MapPost("/registrations", async (IMySqlService mySqlService, RegistrationDTO registration) =>
+{
+    try
+    {
+        RegistrationDTO registrationDTO = await mySqlService.AddRegistration(registration);
+        return Results.Created($"/registrations/{registrationDTO.RegistrationId}", registrationDTO);
+    }
+    catch (Exception e)
+    {
+        return Results.InternalServerError(e.Message);
+    }
+});
+
+app.MapPut("/registrations/{registrationId}", async (IMySqlService mySqlService, int registrationId) =>
+{
+    try
+    {
+        RegistrationDTO registrationDTO = await mySqlService.PutRegistration(registrationId);
+        return Results.Ok(registrationDTO);
+    }
+    catch (Exception e)
+    {
+        return Results.InternalServerError(e.Message);
+    }
 });
 
 app.Run();
+
+public partial class Program ();
