@@ -16,3 +16,4 @@ global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Newtonsoft.Json;
 global using System.Net;
 global using System.Text;
+global using Testcontainers.MySql;

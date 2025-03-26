@@ -70,4 +70,4 @@ app.MapPut("/registrations/{registrationId}", async (IMySqlService mySqlService,
 
 app.Run();
 
-public partial class Program ();
+public partial class Program {};
