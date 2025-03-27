@@ -135,3 +135,9 @@ C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Ex
 C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Serilog.Sinks.Console.dll
 C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
 C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Serilog.Sinks.File.dll
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
+C:\Users\Atvar\Desktop\year2\Backend_Development\Backend_Development\session3\Exercise1\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
