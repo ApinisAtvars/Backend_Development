@@ -6,9 +6,14 @@ public interface IMongoService
     Task<List<Brand>> GetAllBrands();
     Task<List<Occasion>> GetAllOccasions();
     Task AddSneaker(NewSneakerDTO newSneaker);
-    Task<List<Sneaker>> GetAllSneakers();
+    Task<List<Sneaker>> GetAllSneakers(string customerNr);
     Task SetupData();
     Task<Sneaker> GetSneaker(string id);
+    Task<Sneaker> ApplyDiscount(Sneaker item, float discount);
+    Task AddUser(User user);
+    Task<List<User>> GetUsers();
+    Task<User> GetUserByCustomerNr(string customerNr);
+    Task<User> GetUserByApiKey(string apiKey);
 }
 
 public class MongoService : IMongoService
@@ -16,12 +21,14 @@ public class MongoService : IMongoService
     private readonly IMongoRepository _repository;
     private readonly IMapper _mapper;
     private readonly IValidator<NewSneakerDTO> _sneakerValidator;
+    private readonly IUserRepository _userRepository;
 
-    public MongoService(IMongoRepository repository, IMapper mapper, IValidator<NewSneakerDTO> sneakerValidator)
+    public MongoService(IMongoRepository repository, IMapper mapper, IValidator<NewSneakerDTO> sneakerValidator, IUserRepository userRepository)
     {
         _repository = repository;
         _mapper = mapper;
         _sneakerValidator = sneakerValidator;
+        _userRepository = userRepository;
     }
 
     public async Task AddBrand(NewBrandDTO brand)
@@ -51,9 +58,16 @@ public class MongoService : IMongoService
         await _repository.AddSneaker(sneakerToAdd);
     }
 
-    public async Task<List<Sneaker>> GetAllSneakers()
+    public async Task<List<Sneaker>> GetAllSneakers(string customerNr)
     {
-        return await _repository.GetAllSneakers();
+        var user = await _userRepository.GetUserByCustomerNr(customerNr);
+        var discount = user.Discount;
+        List<Sneaker> sneakers = await _repository.GetAllSneakers();
+        foreach (Sneaker sneaker in sneakers)
+        {
+            sneaker.Price -= sneaker.Price * ((decimal)discount / 100);
+        }
+        return sneakers;
     }
 
     public async Task<Sneaker> GetSneaker(string id)
@@ -92,4 +106,42 @@ public class MongoService : IMongoService
     }
 
 
+    /*
+    User Repository methods
+    */
+    public async Task<Sneaker> ApplyDiscount(Sneaker item, float discount)
+    {
+        if (item is Sneaker sneaker)
+        {
+            sneaker.Price -= sneaker.Price * ((decimal)discount / 100);
+            await _repository.AddSneaker(sneaker);
+            return item;
+        }
+        throw new InvalidOperationException("Item is not a Sneaker");
+    }
+
+    public async Task AddUser(User user)
+    {
+        List<User> users = await _userRepository.GetUsers();
+        if (users.Any(u => u.CustomerNr == user.CustomerNr))
+        {
+            throw new Exception("User already exists");
+        }
+        await _userRepository.AddUser(user);
+    }
+
+    public async Task<List<User>> GetUsers()
+    {
+        return await _userRepository.GetUsers();
+    }
+
+    public async Task<User> GetUserByCustomerNr(string customerNr)
+    {
+        return await _userRepository.GetUserByCustomerNr(customerNr);
+    }
+
+    public async Task<User> GetUserByApiKey(string apiKey)
+    {
+        return await _userRepository.GetUserByApiKey(apiKey);
+    }
 }

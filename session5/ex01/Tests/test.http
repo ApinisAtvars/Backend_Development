@@ -50,3 +50,23 @@ XApiKey: {{apikey}}
 ### GET sneaker by ID
 GET {{url}}/sneakers/67e2a9c1fb5dc482d6f92412
 XApiKey: {{apikey}}
+
+### POST new User
+
+POST {{url}}/users
+XApiKey: {{apikey}}
+Content-Type: application/json
+
+{
+  "customerNr": "K0002",
+  "discount": 10,
+  "apiKey": "API-KEY-4321"
+}
+
+### GET sneakers with custom API key for user K0001
+GET {{url}}/sneakers
+XApiKey: API-KEY-1234
+
+### GET sneakers with custom API key for user K0002
+GET {{url}}/sneakers
+XApiKey: API-KEY-4321

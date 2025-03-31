@@ -8,5 +8,6 @@ public class DatabaseSettings
     public string? BrandsCollection { get; set; }
     public string? OccasionCollection { get; set; }
     public string? OrdersCollection { get; set; }
+    public string? UsersCollection { get; set; }
 }
 

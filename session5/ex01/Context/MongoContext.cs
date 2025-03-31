@@ -8,6 +8,7 @@ public interface IMongoContext
     IMongoCollection<Brand> BrandsCollection { get; }
     IMongoCollection<Occasion> OccasionCollection { get; }
     IMongoCollection<Order> OrdersCollection { get; }
+    IMongoCollection<User> UsersCollection { get; }
 }
 
 public class MongoContext : IMongoContext{
@@ -60,6 +61,13 @@ public class MongoContext : IMongoContext{
         get
         {
             return _database.GetCollection<Order>(_settings.OrdersCollection);
+        }
+    }
+    public IMongoCollection<User> UsersCollection
+    {
+        get
+        {
+            return _database.GetCollection<User>(_settings.UsersCollection);
         }
     }
 }
