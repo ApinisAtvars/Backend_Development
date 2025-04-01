@@ -1,0 +1,22 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "MongoConnection": {
+    "ConnectionString": "mongodb-connection-string",
+    "DatabaseName": "SneakerDb",
+    "SneakerCollection": "Sneakers",
+    "BrandsCollection": "Brands",
+    "OccasionCollection": "Occasions",
+    "OrdersCollection" : "Orders",
+    "UsersCollection" : "Users"
+  },
+  "ApiKeySettings": {
+    "ApiKey": "secret key"
+  }
+  
+}

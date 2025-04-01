@@ -1,0 +1,20 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "DatabaseSettings": {
+    "ConnectionString": "mongodb-connection-string",
+    "ConnectionStringUsers": "mysql-connection-string",
+    "DatabaseName": "SneakerDb",
+    "SneakerCollection": "Sneakers",
+    "BrandsCollection": "Brands",
+    "OccasionCollection": "Occasions",
+    "OrdersCollection" : "Orders",
+    "UsersCollection" : "Users"
+  }
+  
+}
