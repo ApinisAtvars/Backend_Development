@@ -5,7 +5,7 @@ public class BrandIntegrationTest: IAsyncLifetime
 {
     private HttpClient _httpClient;
     private SneakerApiFactory _factory;
-    private const string APIKEY = "secret key";
+    private const string APIKEY = "usersecret";
 
     public BrandIntegrationTest()
     {

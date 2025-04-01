@@ -33,13 +33,15 @@ public class SneakerApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
                 options.BrandsCollection = "Brands";
                 options.OccasionCollection = "Occasions";
                 options.OrdersCollection = "Orders";
+                options.UsersCollection = "Users";
                 
             });
 
             // Hardcode API key
-            services.Configure<APIKeySettings>(options => {
-                options.ApiKey = "secret key";
-            });
+            // Commented out because now we have different API keys for different users
+            // services.Configure<APIKeySettings>(options => {
+            //     options.ApiKey = "secret key";
+            // });
 
             services.AddScoped<IMongoContext>(sp => {
                 // Read settings from DI container, and get IOptions<DatabaseSettings> object back
@@ -55,6 +57,7 @@ public class SneakerApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
             collections.Add("Brands");
             collections.Add("Occasions");
             collections.Add("Orders");
+            collections.Add("Users");
 
             var diSystem = services.BuildServiceProvider(); // Get reference to the DI system
             var mongoContext = diSystem.GetRequiredService<IMongoContext>(); // Get the mongo context from the DI system
@@ -82,7 +85,14 @@ public class SneakerApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
             var occasionsCollection = mongoContext.Database.GetCollection<Occasion>("Occasions");
             occasionsCollection.InsertOne(new Occasion { OccasionId = ObjectId.GenerateNewId().ToString(), Description = "Sports" });
 
-            
+            var userCollection = mongoContext.Database.GetCollection<User>("Users");
+            var dummyUser = new User(){
+                Id = ObjectId.GenerateNewId().ToString(),
+                CustomerNr = "K0001",
+                Discount = 4,
+                ApiKey = "usersecret"
+            };
+            userCollection.InsertOne(dummyUser); // Insert dummy user into the Users collection, this  user we will use for testing
         });
     }
 
