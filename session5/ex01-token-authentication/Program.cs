@@ -34,3 +34,5 @@ app.MapGet("/sneakers", async (IMongoService sneakerService, HttpContext context
 }).RequireAuthorization();  //Make the API Secure
 
 app.Run();
+
+public partial class Program {}
