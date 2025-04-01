@@ -1,0 +1,29 @@
+@host = http://localhost:5083
+
+### POST new user
+POST  {{host}}/register
+Content-Type: application/json
+
+{
+  "username": "tonyt",
+  "password": "SuperSecret1!",
+  "email": "tony@test.com",
+  "company": "Howest"
+}
+
+### Log in
+POST {{host}}/login
+Content-Type: application/json
+
+{
+  "email": "tony@test.com",
+  "password": "SuperSecret1!"
+}
+
+
+
+###
+@tokenAdmin=CfDJ8EKU8JVIuk5AvfqxDrjgf1L-RFvMF0pNDVs4bEilTevJ_xdvCwixljdYjZLk7SoJKfW4HAj3n6JOCRQrq7Oh-UT20p0gpUdorXKW8pnYquEk1aJ2aFoMkOobGz3nW8nfNED_HSeE2djwpBtvCiW9tJB9cH_4kxEIDUgTeDIRIt3Jpru8x7NlZGCX7hfK8DzJakmWctVanF_NXzKkcK92ZRfhpZ4qQb58gH-hHDM3l1tSq7rblRj5DvYIzhGbrDIRwM7IssSMXP1cmnUgLs8OvVo87b7kwGnE02GTVFy75UgHrONt_D9dBa38QIt5btrVvc_jtAJMONr3xmCUhNvyBJjROwi5-sQ0pxqoOmeMasDmju1nHACboR5Rc4-S1VG7dBzCaIVis0Gx4jHbP8djUfJPMkUtAxOXZ6Gf8C_oIGjfHYZrY-PfwcceZ1pIwXuSOYt5UIuCUJNXZh2_CtNP6a5HHncoBpbCQa9eZqJ7s_VG36WYdBk_R3R9eCJ7nb6LGxwgd0HH1HnoxPcPReXhaDL2WeCHxDmWlyQ6pnG3OW4dg8Zqsbhl8O4W8_ufY9gIdaQINm0L2t8KOfHkeCAuix_9Z1nnU58CVPZ3F_L81B7fUzcIiZzWytUrfZJWFRQb1g0fPYACiZI_ZQjF8X6xh7st9WLPWYpxkfL1wu6P9JWrOLGrzvxDX7SM3fkgKisG5A
+
+GET {{host}}/sneakers
+Authorization: Bearer {{tokenAdmin}}
