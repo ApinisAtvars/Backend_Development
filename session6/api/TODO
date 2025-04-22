@@ -1,0 +1,4 @@
+- Add custom exceptions in MongoRepository
+    - SensorNotFoundException
+    - BuildingNotFoundException
+

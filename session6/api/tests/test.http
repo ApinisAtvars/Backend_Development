@@ -1,0 +1,51 @@
+@url = http://localhost:5007
+### POST a new building
+
+POST {{url}}/buildings
+Content-Type: application/json
+
+{
+  "name": "Test Building",
+  "address": "123 Test St",
+  "city": "Test City",
+  "country": "Test Country",
+  "postalCode": "12345"
+}
+
+### GET all buildings
+GET {{url}}/buildings
+
+### GET a building by ID
+GET {{url}}/buildings/680799dad8056ce8eaa438aa
+
+### POST a sensor for a building
+POST {{url}}/buildings/680799dad8056ce8eaa438aa/sensors
+Content-Type: application/json
+
+{
+  "name": "NowWithIdForSure",
+  "type": "temperature",
+  "unit": "Celsius"
+}
+
+### WRONG GET building by ID
+GET {{url}}/buildings/68078944517236d1e8df57be
+
+
+### POST a sensor log for a sensor
+POST {{url}}/sensorlogs
+Content-Type: application/json
+
+{
+    "buildingId": "680799dad8056ce8eaa438aa",
+    "sensorId": "68079a02d8056ce8eaa438ab",
+    "value": 10000,
+    "unit": "Celsius",
+    "timestamp": "2023-10-01T12:00:00Z"
+}
+
+### GET all sensorlogs
+GET {{url}}/sensorlogs/
+
+### GET sensor stats
+GET {{url}}/sensorlogs/stats/680799dad8056ce8eaa438aa/68079a02d8056ce8eaa438ab

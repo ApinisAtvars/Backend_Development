@@ -11,3 +11,12 @@ public class BuildingDTO
 
     
 }
+
+public class BuildingDTOProfile : Profile
+{
+    public BuildingDTOProfile()
+    {
+        CreateMap<Building, BuildingDTO>();
+        CreateMap<BuildingDTO, Building>();
+    }
+}
